@@ -1,20 +1,15 @@
-#ifndef LINKEDLIST_H
-#define LINKEDLIST_H
+#ifndef SOLTAIRESPIDER_LINKEDLIST_H
+#define SOLTAIRESPIDER_LINKEDLIST_H
 
 #include <iostream>
 #include <string>
+#include "Node.h"
 
 template <typename T>
 class LinkedList {
 private:
-    struct Node {
-        T element;
-        Node* next;
-        Node(const T& e) : element(e), next(nullptr) {}
-    };
-
-    Node* head;
-    Node* tail;
+    Node<T>* head; // Updated to Node<T>
+    Node<T>* tail; // Updated to Node<T>
     int size;
 
 public:
@@ -22,9 +17,9 @@ public:
     LinkedList() : head(nullptr), tail(nullptr), size(0) {}
 
     ~LinkedList() {
-        Node* current = head;
+        Node<T>* current = head;
         while (current != nullptr) {
-            Node* nextNode = current->next;
+            Node<T>* nextNode = current->next;
             delete current;
             current = nextNode;
         }
@@ -32,7 +27,7 @@ public:
 
     // --- Addition Methods ---
     void addFirst(const T& e) {
-        Node* newNode = new Node(e);
+        Node<T>* newNode = new Node<T>(e);
         newNode->next = head;
         head = newNode;
         if (tail == nullptr) tail = head;
@@ -40,7 +35,7 @@ public:
     }
 
     void addLast(const T& e) {
-        Node* temp = new Node(e);
+        Node<T>* temp = new Node<T>(e);
         if (head == nullptr) {
             head = tail = temp;
         } else {
@@ -54,11 +49,11 @@ public:
         if (index <= 0) addFirst(e);
         else if (index >= size) addLast(e);
         else {
-            Node* current = head;
+            Node<T>* current = head;
             for (int i = 1; i < index; i++)
                 current = current->next;
-            Node* temp = current->next;
-            current->next = new Node(e);
+            Node<T>* temp = current->next;
+            current->next = new Node<T>(e);
             current->next->next = temp;
             size++;
         }
@@ -67,7 +62,7 @@ public:
     // --- Removal Methods ---
     void removeFirst() {
         if (size == 0) return;
-        Node* temp = head;
+        Node<T>* temp = head;
         head = head->next;
         delete temp;
         size--;
@@ -81,7 +76,7 @@ public:
             head = tail = nullptr;
             size = 0;
         } else {
-            Node* current = head;
+            Node<T>* current = head;
             while (current->next != tail)
                 current = current->next;
             delete tail;
@@ -91,26 +86,23 @@ public:
         }
     }
 
-    // --- Getters (Fixed for your main.cpp) ---
+    // --- Getters ---
     int getSize() const { return size; }
 
     bool isEmpty() const { return head == nullptr; }
 
-    // Used by displayBoard to get cards at specific rows
     T getElementAt(int index) const {
         if (index < 0 || index >= size) return T();
-        Node* temp = head;
+        Node<T>* temp = head;
         for (int i = 0; i < index; i++) temp = temp->next;
         return temp->element;
     }
 
-    // Required by startGame() to deal cards
     T getHeadElement() const {
         if (head == nullptr) return T();
         return head->element;
     }
 
-    // Required by game logic to pick up the bottom card
     T getLastElement() const {
         if (tail == nullptr) return T();
         return tail->element;
@@ -118,7 +110,7 @@ public:
 
     // --- Utility ---
     void display() const {
-        Node* temp = head;
+        Node<T>* temp = head;
         while (temp != nullptr) {
             std::cout << temp->element << " ";
             temp = temp->next;
@@ -130,7 +122,7 @@ public:
         if (!head || size < 2) return;
         bool swapped = true;
         while (swapped) {
-            Node* temp = head;
+            Node<T>* temp = head;
             swapped = false;
             while (temp->next != nullptr) {
                 if (temp->element > temp->next->element) {
@@ -143,7 +135,7 @@ public:
             }
         }
         // Re-sync tail pointer after sort
-        Node* curr = head;
+        Node<T>* curr = head;
         while (curr && curr->next) curr = curr->next;
         tail = curr;
     }

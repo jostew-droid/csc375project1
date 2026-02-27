@@ -6,20 +6,12 @@
 #include "Node.h"
 
 
-#include <iostream>
-#include <string>
 
 template <typename T>
 class Queue {
 private:
-    struct Node {
-        T element;
-        Node* next;
-        Node(const T& e) : element(e), next(nullptr) {}
-    };
-
-    Node* head;
-    Node* tail;
+    Node<T>* head; // Must specify <T>
+    Node<T>* tail; // Must specify <T>
     int size;
 
 public:
@@ -29,7 +21,7 @@ public:
     // Destructor
     ~Queue() {
         while (head != nullptr) {
-            Node* temp = head;
+            Node<T>* temp = head; // Added <T>
             head = head->next;
             delete temp;
         }
@@ -37,7 +29,7 @@ public:
 
     // Add an element to the end of the queue (Enqueue)
     void enqueue(const T& element) {
-        Node* temp = new Node(element);
+        Node<T>* temp = new Node<T>(element); // Added <T> for the constructor
         if (head == nullptr) {
             head = tail = temp;
         } else {
@@ -51,7 +43,7 @@ public:
     void dequeue() {
         if (size == 0) return;
 
-        Node* temp = head;
+        Node<T>* temp = head; // Added <T>
         head = head->next;
         delete temp;
         size--;
@@ -66,7 +58,7 @@ public:
         if (head != nullptr) {
             return head->element;
         }
-        return T(); // Returns default (e.g., "" for string, 0 for int)
+        return T();
     }
 
     bool isEmpty() const {
@@ -78,7 +70,7 @@ public:
     }
 
     void display() const {
-        Node* temp = head;
+        Node<T>* temp = head; // Added <T>
         while (temp != nullptr) {
             std::cout << temp->element << " ";
             temp = temp->next;

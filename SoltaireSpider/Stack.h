@@ -4,18 +4,13 @@
 
 #include <iostream>
 #include <string>
+#include "Node.h"
 
 template <typename T>
 class Stack {
 private:
-    struct Node {
-        T element;
-        Node* next;
-        Node(const T& e) : element(e), next(nullptr) {}
-    };
-
-    Node* head;
-    Node* tail;
+    Node<T>* head; // Must specify <T>
+    Node<T>* tail; // Must specify <T>
     int size;
 
 public:
@@ -25,15 +20,15 @@ public:
     // Destructor
     ~Stack() {
         while (head != nullptr) {
-            Node* temp = head;
+            Node<T>* temp = head;
             head = head->next;
             delete temp;
         }
     }
 
-    // Add an element to the top
+    // Add an element to the top (Push)
     void push(const T& e) {
-        Node* newNode = new Node(e);
+        Node<T>* newNode = new Node<T>(e); // Create a Node of type T
         newNode->next = head;
         head = newNode;
 
@@ -43,11 +38,11 @@ public:
         size++;
     }
 
-    // Remove the top element
+    // Remove the top element (Pop)
     void pop() {
         if (size == 0) return;
 
-        Node* temp = head;
+        Node<T>* temp = head;
         head = head->next;
         delete temp;
         size--;
@@ -62,12 +57,12 @@ public:
         if (head != nullptr) {
             return head->element;
         }
-        return T(); // Returns default value (0 for int, "" for string)
+        return T();
     }
 
     // Display elements from top to bottom
     void display() const {
-        Node* temp = head;
+        Node<T>* temp = head;
         while (temp != nullptr) {
             std::cout << temp->element << " ";
             temp = temp->next;
@@ -78,5 +73,4 @@ public:
     int getSize() const { return size; }
     bool isEmpty() const { return size == 0; }
 };
-
 #endif//SOLTAIRESPIDER_STACK_H

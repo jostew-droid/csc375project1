@@ -82,7 +82,7 @@ void displayBoard(LinkedList<std::string> columns[10], int flippedIndex[10]) {
     }
 
     cout << "--------------------------------------------------------------------------------\n";
-    cout << left << setw(15) << "Deck: [|||]" << "Discard: [   ]" << endl;
+    cout << left << setw(15) << "Deck: [ ? ]" << "Discard: [   ]" << endl;
 }
 
 // Show the basic rules

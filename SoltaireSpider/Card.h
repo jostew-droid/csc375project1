@@ -36,6 +36,10 @@ public:
         return (suit == "S" || suit == "C");
     }
 
+    bool canPlaceOn(const Card& other) {
+        return this->rank == other.rank - 1;
+    }
+
 };
 
 #endif //SOLTAIRESPIDER_CARD_H

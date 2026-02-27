@@ -7,17 +7,16 @@
 #include <string>
 // This class represents a node in a linked list
 
-    class Node
+template <typename T>
+class Node {
+public:
+    T element;      // Now can be string, int, Card, etc.
+    Node<T>* next;  // Pointer to the next Node of the same type
+
+    Node(const T& element)
+        : element(element), next(nullptr)
     {
-    public:
-        std::string element;
-        Node* next;
-        Node(const std::string& element)
-            : element(element), next(nullptr)
-        {
-        }
-    };
-
-
+    }
+};
 
 #endif //SOLTAIRESPIDER_NODE_H
