@@ -1,11 +1,11 @@
 //Implementation of a linked list for the deck class
-#include <string>
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 using namespace std;
 
-
 template <typename T> struct Node {
-    T data = "";
-    Node* next;
+    T data;
+    Node<T>* next;
 };
 
 
@@ -14,23 +14,20 @@ private:
     Node<T>* head;
 
 public:
-
-    LinkedList() {
-
-        head = nullptr;
-
-    }
-
+    LinkedList();
     //Transformers
     void insertFront(T item);
     void insertBack(T item);
-    void insertIndex(int index, T item);
-    T popFront();
-    T popBack();
-    T popIndex();
+    void insertBetween(T prev, T item);
+    Node<T>* findNode(T item);
+    T removeNode(T item);
+
     //Aux Functions
     int getSize();
     bool isEmpty();
     void print();
 
+
+
 };
+#endif // LINKEDLIST_H
