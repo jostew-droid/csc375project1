@@ -110,6 +110,7 @@ template <typename T> bool LinkedList<T>::isEmpty() {
     }
     return false;
 }
+
 template <typename T> void LinkedList<T>::print() {
     int num = 0;
     Node<T>* current = head;
@@ -122,4 +123,14 @@ template <typename T> void LinkedList<T>::print() {
         current = current->next;
         num++;
     }
+}
+
+template<typename T> LinkedList<T>::~LinkedList() {
+    Node<T>* current = head;
+    while (current != nullptr) {
+        Node<T>* next = current->next;
+        delete current;
+        current = next;
+    }
+    head = nullptr;
 }

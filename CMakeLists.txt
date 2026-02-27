@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(project1_spidersol src/main.cpp
         src/LinkedList.h
         src/LinkedList.cpp
-        src/LLTests.cpp
+        src/Deck.cpp
 )

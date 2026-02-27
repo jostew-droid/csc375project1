@@ -15,6 +15,7 @@ private:
 
 public:
     LinkedList();
+    ~LinkedList();
     //Transformers
     void insertFront(T item);
     void insertBack(T item);

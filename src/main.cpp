@@ -1,6 +1,4 @@
-#include <iostream>
-#include "LLTests.cpp"
-#include "LinkedList.cpp"
+#include "Deck.cpp"
 using namespace std;
 
 
@@ -28,9 +26,45 @@ bool test1() {
     return result;
 }
 
+bool test2() {
+    cout << "------Test 2------" << endl;
+    Deck<string>* myDeck = new Deck<string>();
+    bool result = true;
+    string suit = "";
+    for (int i = 0; i < 4; i++) {
+        switch (i) {
+            case 0:
+                suit = "S";
+                break;
+            case 1:
+                suit = "C";
+                break;
+            case 2:
+                suit = "D";
+                break;
+            case 3:
+                suit = "H";
+                break;
+            default:
+                suit = "Z";
+                break;
+        }
+        myDeck->push("A" + suit);
+        for (int j = 2; j < 11; j++) {
+            myDeck->push(to_string(j) + suit);
+        }
+        myDeck->push("J" + suit);
+        myDeck->push("Q" + suit);
+        myDeck->push("K" + suit);
+    }
+    myDeck->print();
+    return result;
+}
+
 
 void runLinkedListTests() {
-    test1();
+    // test1();
+    test2();
 }
 
 
