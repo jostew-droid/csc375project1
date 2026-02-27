@@ -141,4 +141,4 @@ public:
     }
 };
 
-#endif
+#endif //SOLTAIRESPIDER_CARD_H

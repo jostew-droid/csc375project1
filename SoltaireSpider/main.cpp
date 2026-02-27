@@ -35,7 +35,7 @@ void showTitle() {
 }
 
 // Logic to print the 10 piles vertically so it looks like real Solitaire
-void displayBoard(LinkedList<std::string> columns[10], int flippedIndex[10]) {
+void displayBoard(LinkedList<Card> columns[10], int flippedIndex[10]) {
     clearScreen();
     showTitle();
 
@@ -55,9 +55,9 @@ void displayBoard(LinkedList<std::string> columns[10], int flippedIndex[10]) {
     for (int r = 0; r < maxHeight; r++) {
         for (int c = 0; c < 10; c++) {
             // Get the card at this specific row in this column
-            string card = columns[c].getElementAt(r);
+            Card cardObj = columns[c].getElementAt(r);
 
-            if (card != "") {
+            if (cardObj.rank != 0) {
                 string toPrint;
                 // If the card is hidden (face-down), show a question mark
                 if (r < flippedIndex[c]) {
@@ -65,11 +65,11 @@ void displayBoard(LinkedList<std::string> columns[10], int flippedIndex[10]) {
                 }
                 // If it's the last card, show the full rank/suit
                 else if (r == columns[c].getSize() - 1) {
-                    toPrint = " " + card + " ";
+                    toPrint = " " + cardObj.toString() + " ";
                 }
                 // Otherwise it's part of a face-up stack
                 else {
-                    toPrint = " " + card;
+                    toPrint = " " + cardObj.toString();
                 }
                 // Align everything nicely with 8 spaces
                 cout << left << setw(8) << toPrint;
@@ -115,14 +115,14 @@ void startGame() {
         }
     }
 
-    // Set up the deck (templated for strings) and shuffle it
-    Deck<std::string> myDeck(numSuits);
+    // Set up the deck (templated for cards) and shuffle it
+    Deck<Card> myDeck(numSuits);
     myDeck.shuffle();
 
     // Arrays for our 10 columns and the stock pile
-    LinkedList<std::string> columns[10];
+    LinkedList<Card> columns[10];
     int flippedIndex[10];
-    LinkedList<std::string> stock;
+    LinkedList<Card> stock;
 
     // Put the shuffled deck into our stock list
     myDeck.loadIntoList(stock);
@@ -132,9 +132,9 @@ void startGame() {
     // Deal out the first 54 cards to the board
     for (int i = 0; i < 54; ++i) {
         int colIndex = i % 10;
-        string cardToDeal = stock.getHeadElement();
+        Card cardToDeal = stock.getHeadElement();
 
-        if (cardToDeal != "") {
+        if (cardToDeal.rank != 0) {
             columns[colIndex].addLast(cardToDeal);
             stock.removeFirst();
         }
@@ -168,23 +168,38 @@ void startGame() {
 
         // Check if the move is actually possible
         if (src >= 0 && src < 10 && dest >= 0 && dest < 10 && !columns[src].isEmpty()) {
-            string card = columns[src].getLastElement();
-
-            // Move card from source to destination
-            columns[dest].addLast(card);
-            columns[src].removeLast();
-
-            // If we moved the last visible card, flip the one under it
-            if (columns[src].getSize() > 0 && flippedIndex[src] >= columns[src].getSize()) {
-                flippedIndex[src] = columns[src].getSize() - 1;
+           // logic check: we can use the card class if the move is valid
+           Card movingCard= columns[src].getLastElement();
+            // If the destination isn't empty, we should check if the move is valid
+            bool validMove = true;
+            if (!columns[dest].isEmpty()) {
+                Card targetCard = columns[dest].getLastElement();
+                // We use our helper function from Card.h
+                if (!movingCard.canPlaceOn(targetCard)) {
+                    validMove = false;
+                }
             }
+
+            if (validMove) {
+                columns[dest].addLast(movingCard);
+                columns[src].removeLast();
+
+                // If we moved the last visible card, flip the one under it
+                if (columns[src].getSize() > 0 && (columns[src].getSize() - 1) < flippedIndex[src]) {
+                    flippedIndex[src] = columns[src].getSize() - 1;
+                }
+            } else {
+                cout << "\nIllegal Move! Cards must be in descending order. Press Enter...";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin.get();
+            }
+
         } else {
-            cout << "\nInvalid Move! Press Enter to try again...";
+            cout << "\nInvalid Input! Press Enter to try again...";
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin.get();
         }
     }
-
     cout << "\nReturning to menu...\n";
     pause();
 }

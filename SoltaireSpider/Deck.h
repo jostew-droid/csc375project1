@@ -1,6 +1,6 @@
 #ifndef SOLTAIRESPIDER_DECK_H
 #define SOLTAIRESPIDER_DECK_H
-
+#include "Node.h"
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -8,7 +8,7 @@
 #include <random>
 #include "LinkedList.h"
 #include "Card.h"
-#include "Node.h"
+
 
 template <typename T>
 class Deck {
@@ -21,8 +21,8 @@ public:
         std::string suitNames[] = {"S", "H", "D", "C"};
 
         for (int i = 0; i < 104; ++i) {
-            int rank = (i % 13) + 1;
-            int suitIndex = (i / 13) % numSuits;
+            int rank = (i % 13) + 1; //cycles 1 thru 13
+            int suitIndex = (i / 13) % numSuits; // switches suit every 13th card
             std::string suit = suitNames[suitIndex];
 
             Card tempCard(rank, suit);
@@ -44,7 +44,7 @@ public:
         std::shuffle(cards.begin(), cards.end(), g);
     }
 
-    // Pours the cards from the vector into your templated LinkedList
+    // Pours the cards from the vector into templated LinkedList
     void loadIntoList(LinkedList<T>& list) {
         for (const T& c : cards) {
             list.addLast(c);

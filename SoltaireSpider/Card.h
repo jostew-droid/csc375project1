@@ -13,6 +13,8 @@ public:
     // Using integers for rank makes math/logic easy: 11=J, 12=Q, 13=K
     int rank;
     std::string suit;
+    // ADD THIS LINE: The default constructor
+    Card() : rank(0), suit("") {}
 
     Card(int r, std::string s) : rank(r), suit(s) {}
 
