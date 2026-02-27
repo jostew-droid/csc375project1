@@ -1,0 +1,44 @@
+[
+{
+  "directory": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\G__~1.EXE -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\SoltaireSpider.dir\\main.cpp.obj -c C:\\Users\\pranj\\CLionProjects\\SoltaireSpider\\main.cpp",
+  "file": "C:/Users/pranj/CLionProjects/SoltaireSpider/main.cpp",
+  "output": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/SoltaireSpider.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\G__~1.EXE -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\SoltaireSpider.dir\\Node.cpp.obj -c C:\\Users\\pranj\\CLionProjects\\SoltaireSpider\\Node.cpp",
+  "file": "C:/Users/pranj/CLionProjects/SoltaireSpider/Node.cpp",
+  "output": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/SoltaireSpider.dir/Node.cpp.obj"
+},
+{
+  "directory": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\G__~1.EXE -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\SoltaireSpider.dir\\Stack.cpp.obj -c C:\\Users\\pranj\\CLionProjects\\SoltaireSpider\\Stack.cpp",
+  "file": "C:/Users/pranj/CLionProjects/SoltaireSpider/Stack.cpp",
+  "output": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/SoltaireSpider.dir/Stack.cpp.obj"
+},
+{
+  "directory": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\G__~1.EXE -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\SoltaireSpider.dir\\Queue.cpp.obj -c C:\\Users\\pranj\\CLionProjects\\SoltaireSpider\\Queue.cpp",
+  "file": "C:/Users/pranj/CLionProjects/SoltaireSpider/Queue.cpp",
+  "output": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/SoltaireSpider.dir/Queue.cpp.obj"
+},
+{
+  "directory": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\G__~1.EXE -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\SoltaireSpider.dir\\LinkedList.cpp.obj -c C:\\Users\\pranj\\CLionProjects\\SoltaireSpider\\LinkedList.cpp",
+  "file": "C:/Users/pranj/CLionProjects/SoltaireSpider/LinkedList.cpp",
+  "output": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/SoltaireSpider.dir/LinkedList.cpp.obj"
+},
+{
+  "directory": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\G__~1.EXE -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\SoltaireSpider.dir\\Card.cpp.obj -c C:\\Users\\pranj\\CLionProjects\\SoltaireSpider\\Card.cpp",
+  "file": "C:/Users/pranj/CLionProjects/SoltaireSpider/Card.cpp",
+  "output": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/SoltaireSpider.dir/Card.cpp.obj"
+},
+{
+  "directory": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\G__~1.EXE -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\SoltaireSpider.dir\\Deck.cpp.obj -c C:\\Users\\pranj\\CLionProjects\\SoltaireSpider\\Deck.cpp",
+  "file": "C:/Users/pranj/CLionProjects/SoltaireSpider/Deck.cpp",
+  "output": "C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/SoltaireSpider.dir/Deck.cpp.obj"
+}
+]
