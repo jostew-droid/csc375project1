@@ -1,10 +1,10 @@
 #ifndef SOLTAIRESPIDER_STACK_H
 #define SOLTAIRESPIDER_STACK_H
 
-
+#include "Node.h"
 #include <iostream>
 #include <string>
-#include "Node.h"
+
 
 template <typename T>
 class Stack {

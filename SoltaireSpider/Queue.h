@@ -1,9 +1,9 @@
 #ifndef SOLTAIRESPIDER_QUEUE_H
 #define SOLTAIRESPIDER_QUEUE_H
-
+#include "Node.h"
 #include <iostream>
 #include <string>
-#include "Node.h"
+
 
 
 

@@ -1,9 +1,9 @@
 #ifndef SOLTAIRESPIDER_LINKEDLIST_H
 #define SOLTAIRESPIDER_LINKEDLIST_H
-
+#include "Node.h"
 #include <iostream>
 #include <string>
-#include "Node.h"
+
 
 template <typename T>
 class LinkedList {

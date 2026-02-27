@@ -5,7 +5,7 @@
 #ifndef SOLTAIRESPIDER_CARD_H
 #define SOLTAIRESPIDER_CARD_H
 
-#include "Node.h"
+
 #include <string>
 
 class Card {
