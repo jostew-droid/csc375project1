@@ -44,6 +44,8 @@ void displayBoard(LinkedList<Card> columns[10], int flippedIndex[10]) {
     for (int i = 0; i < 10; i++) {
         if (columns[i].getSize() > maxHeight) maxHeight = columns[i].getSize();
     }
+    // Printing Foundational/Sorted Pile
+    cout << left << setw(15) << "Heart Pile: [   ] " << "Diamond Pile: [   ] " << "Spade Pile: [   ] " << "Clubs Pile: [   ]" <<endl;
 
     // Printing headers P1 through P10
     for (int i = 1; i <= 10; i++) {
@@ -83,6 +85,8 @@ void displayBoard(LinkedList<Card> columns[10], int flippedIndex[10]) {
 
     cout << "--------------------------------------------------------------------------------\n";
     cout << left << setw(15) << "Deck: [ ? ]" << "Discard: [   ]" << endl;
+    // functionality yet to add
+    cout << left << setw(15) << "[1] Flip Cards: " << " [2] Move card to Sort Pile:" <<" [3] Move cards in Pile or Discard: [   ]" <<  endl;
 }
 
 // Show the basic rules
@@ -122,6 +126,7 @@ void startGame() {
     // Arrays for our 10 columns and the stock pile
     LinkedList<Card> columns[10];
     int flippedIndex[10];
+    Card foundations[4];
     LinkedList<Card> stock;
 
     // Put the shuffled deck into our stock list
@@ -147,65 +152,107 @@ void startGame() {
 
     // Main game loop
     bool gaming = true;
-    while (gaming) {
-        displayBoard(columns, flippedIndex);
+while (gaming) {
+    displayBoard(columns, flippedIndex);
 
-        int src, dest;
-        cout << "\nEnter move (Source [1-10] Destination [1-10]) or '0 0' to quit: ";
+    int srcCol, numToMove, dest;
+    cout << "\nMove format: [Source 1-10] [HowMany 1-y] [Dest 1-10]";
+    cout << "\nEnter move (or 0 0 0 to quit): ";
 
-        // Check if they typed numbers or something else
-        if (!(cin >> src >> dest)) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
+    if (!(cin >> srcCol >> numToMove >> dest)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        continue;
+    }
+
+    if (srcCol == 0) break;
+
+    // Adjust to 0-based indexing
+    srcCol--;
+    dest--;
+
+    // 1. Basic Boundary Check
+    if (srcCol >= 0 && srcCol < 10 && dest >= 0 && dest < 10 && columns[srcCol].getSize() >= numToMove) {
+
+        bool validStack = true;
+        int startIndex = columns[srcCol].getSize() - numToMove;
+
+        // 2. CHECK: Is the stack being picked up a valid Spider sequence?
+        // Must be face-up, same suit, and descending rank (e.g., 7H, 6H, 5H)
+        for (int i = 0; i < numToMove; i++) {
+            int currentIdx = startIndex + i;
+
+            // Cannot move hidden cards
+            if (currentIdx < flippedIndex[srcCol]) {
+                validStack = false;
+                break;
+            }
+
+            // If moving more than one, check sequence logic
+            if (i > 0) {
+                Card current = columns[srcCol].getElementAt(currentIdx);
+                Card previous = columns[srcCol].getElementAt(currentIdx - 1);
+
+                if (current.suit != previous.suit || current.rank != previous.rank - 1) {
+                    validStack = false;
+                    break;
+                }
+            }
         }
 
-        if (src == 0) break; // Quit back to menu
-
-        // Convert user's 1-10 into array 0-9
-        src--;
-        dest--;
-
-        // Check if the move is actually possible
-        if (src >= 0 && src < 10 && dest >= 0 && dest < 10 && !columns[src].isEmpty()) {
-           // logic check: we can use the card class if the move is valid
-           Card movingCard= columns[src].getLastElement();
-            // If the destination isn't empty, we should check if the move is valid
-            bool validMove = true;
+        // 3. CHECK: Can the top card of our moving stack land on the destination?
+        if (validStack) {
+            Card movingCard = columns[srcCol].getElementAt(startIndex);
             if (!columns[dest].isEmpty()) {
                 Card targetCard = columns[dest].getLastElement();
-                // We use our helper function from Card.h
                 if (!movingCard.canPlaceOn(targetCard)) {
-                    validMove = false;
+                    validStack = false;
                 }
             }
+        }
 
-            if (validMove) {
-                columns[dest].addLast(movingCard);
-                columns[src].removeLast();
+        // 4. EXECUTION: If all checks pass, move the cards
+        if (validStack) {
+            Stack<Card> moveBuffer;
 
-                // If we moved the last visible card, flip the one under it
-                if (columns[src].getSize() > 0 && (columns[src].getSize() - 1) < flippedIndex[src]) {
-                    flippedIndex[src] = columns[src].getSize() - 1;
-                }
-            } else {
-                cout << "\nIllegal Move! Cards must be in descending order. Press Enter...";
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cin.get();
+            // Pull cards off the column and into the buffer
+            for (int i = 0; i < numToMove; i++) {
+                moveBuffer.push(columns[srcCol].getLastElement());
+                columns[srcCol].removeLast();
             }
 
-        } else {
-            cout << "\nInvalid Input! Press Enter to try again...";
+            // Pour buffer into the destination column
+            while (!moveBuffer.isEmpty()) {
+                columns[dest].addLast(moveBuffer.top());
+                moveBuffer.pop();
+            }
+
+            // Flip the card underneath if it was hidden
+            if (columns[srcCol].getSize() > 0 && (columns[srcCol].getSize() - 1) < flippedIndex[srcCol]) {
+                flippedIndex[srcCol] = columns[srcCol].getSize() - 1;
+            }
+        }
+        else
+            {
+            cout << "\nIllegal Move! Check sequence rules. Press Enter...";
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin.get();
         }
+
+    } else
+        {
+        cout << "\nInvalid Input! Check column numbers/sizes. Press Enter...";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.get();
     }
+}
     cout << "\nReturning to menu...\n";
     pause();
 }
 
 // Main menu options
-void showMenu() {
+void showMenu()
+{
     cout << "\n1. Start New Game\n";
     cout << "2. Instructions\n";
     cout << "3. Exit\n";
@@ -213,7 +260,8 @@ void showMenu() {
 }
 
 // Entry point for the program
-int main() {
+int main()
+{
     int choice;
     bool running = true;
 
