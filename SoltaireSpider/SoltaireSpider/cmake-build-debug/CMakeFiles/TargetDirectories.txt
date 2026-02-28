@@ -1,3 +1,0 @@
-C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/SoltaireSpider.dir
-C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/CMakeFiles/rebuild_cache.dir

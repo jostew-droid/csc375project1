@@ -152,7 +152,7 @@ void startGame() {
 
     // Main game loop
     bool gaming = true;
-while (gaming) {
+    while (gaming) {
     displayBoard(columns, flippedIndex);
 
     int srcCol, numToMove, dest;

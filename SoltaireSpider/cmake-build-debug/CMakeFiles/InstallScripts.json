@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"C:/Users/pranj/CLionProjects/SoltaireSpider/cmake-build-debug/cmake_install.cmake"
+		"/Users/jo/CLionProjects/csc375project1test/SoltaireSpider/cmake-build-debug/cmake_install.cmake"
 	],
 	"Parallel" : false
 }
